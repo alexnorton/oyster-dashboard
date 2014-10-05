@@ -1,0 +1,25 @@
+GIT
+  remote: git@github.com:dcparker/ruby-gmail.git
+  revision: f8c2651f19cb41d9efb9029e01b281a609ffe32c
+  specs:
+    ruby-gmail (0.3.1)
+      mail (>= 2.2.1)
+      mime (>= 0.1)
+      shared-mime-info
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    mail (2.6.1)
+      mime-types (>= 1.16, < 3)
+    mime (0.4.2)
+    mime-types (2.3)
+    shared-mime-info (0.2.5)
+    terminal-table (1.4.5)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  ruby-gmail!
+  terminal-table
