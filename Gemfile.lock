@@ -10,6 +10,7 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
+    awesome_print (1.2.0)
     domain_name (0.5.20)
       unf (>= 0.0.5, < 1.0.0)
     http-cookie (1.0.2)
@@ -44,6 +45,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
   mechanize
   ruby-gmail!
   terminal-table

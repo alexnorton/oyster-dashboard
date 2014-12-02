@@ -1,0 +1,14 @@
+
+Date,Start Time,End Time,Journey/Action,Charge,Credit,Balance,Note
+05-Oct-2014,18:22,18:34,"Euston [London Underground] to Kentish Town",0.85,,26.75,"The fare for this journey was capped as you reached the daily charging limit for the zones used"
+05-Oct-2014,17:58,18:13,"Kentish Town to Euston [London Underground]",1.45,,27.60,""
+05-Oct-2014,17:58,,"Auto top-up, Kentish Town",,20.00,29.05,""
+05-Oct-2014,15:08,15:45,"Stratford to Kentish Town",1.80,,9.05,""
+05-Oct-2014,12:23,12:51,"Camden Road to Stratford",1.00,,10.85,""
+04-Oct-2014,19:57,,"Bus journey, route C2",1.45,,11.85,""
+04-Oct-2014,12:52,13:25,"Kentish Town to South Kensington",1.45,,13.30,""
+03-Oct-2014,13:29,13:42,"Bank to Euston [London Underground]",1.45,,14.75,""
+03-Oct-2014,11:52,12:10,"Euston [London Underground] to Bank",1.45,,16.20,""
+03-Oct-2014,08:08,08:20,"Kentish Town to Euston [London Underground]",2.20,,17.65,""
+02-Oct-2014,17:37,17:47,"Euston [London Underground] to Kentish Town",2.20,,19.85,""
+01-Oct-2014,08:23,08:38,"Kentish Town to Euston [London Underground]",2.20,,22.05,""
