@@ -68,7 +68,7 @@ class OysterHistory
   end
 
   def get_location(name)
-    if !(location = @locations.find{|location| location.name == name})
+    unless location = @locations.find{|location| location.name == name}
       location = Location.new(name)
       @locations.push(location)
     end

@@ -1,7 +1,7 @@
 require 'awesome_print'
 require './oyster_history'
 
-config = YAML.load_file('config.yml')
+#config = YAML.load_file('config.yml')
 
 history = OysterHistory.new
 
