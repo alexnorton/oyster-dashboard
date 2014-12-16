@@ -68,6 +68,9 @@ class OysterHistory
   end
 
   def get_location(name)
+    # Strip () or [] brackets after name
+    name = name.match(/^(.*?)( (\(.*?\)|\[.*?\]))?$/)[1]
+    
     unless location = @locations.find{|location| location.name == name}
       location = Location.new(name)
       @locations.push(location)

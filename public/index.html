@@ -15,6 +15,18 @@
       stroke-opacity: .6;
     }
     
+    .node text {
+      font-size: 12px;
+    }
+    
+    html, body {
+      font-family: sans-serif;
+    }
+    
+    svg {
+      border: 1px solid black;
+    }
+    
     </style>
   </head>
   <body>
@@ -28,7 +40,7 @@
     
     var force = d3.layout.force()
     .charge(-1000)
-    .linkDistance(100)
+    .linkDistance(50)
     .size([width, height]);
     
     var svg = d3.select("body").append("svg")
@@ -54,13 +66,21 @@
       .attr("class", "node")
       .call(force.drag);
       
-      node.append("circle")
-        .attr("r", 7)
-        .style("fill", function(d) { return color(0); });
+      // node.append("circle")
+      //   .attr("r", 7)
+      //   .style("fill", function(d) { return color(0); });
+        
+        node.append("image")
+        .attr("xlink:href", "https://upload.wikimedia.org/wikipedia/commons/4/41/Underground.svg")
+        .attr("x", -10)
+        .attr("y", -10)
+        .attr("width", 20)
+        .attr("height", 20);
       
       node.append("text")
-      .attr("dx", 12)
-      .attr("dy", ".35em")
+      // .attr("dx", 12)
+      .attr("dy", "16px")
+      .style("text-anchor", "middle")
       .text(function(d) { return d.name; });
       
       force.on("tick", function() {
