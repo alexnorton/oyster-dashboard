@@ -30,7 +30,7 @@ module Sinatra
       journey = nil
 
       case event[:action]
-        when /^(.*?) to (.*?)$/
+        when /^(.*?)(?: (?:\[.*?\]|\(.*?\)))? to (.*?)(?: (?:\[.*?\]|\(.*?\)))?$/
           journey = RailJourney.create(
               from: Location.find_or_create_by(name: $1),
               to: Location.find_or_create_by(name: $2),
