@@ -30,6 +30,7 @@ class Import < Sinatra::Base
       || (username == 'test' && password == 'test' && Sinatra::Base.development?)
   end
 
+  # Mounted at /journey/import (see config.ru)
   post '/' do
 
     error 400, 'No attachments found' unless params['attachments']
