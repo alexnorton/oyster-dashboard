@@ -8,10 +8,6 @@ require_relative 'model/rail_journey'
 class App < Sinatra::Base
   register Sinatra::ActiveRecordExtension
 
-  puts ActiveRecord::Base.connection_config
-
-  set :server, 'thin'
-  
   get '/data.json' do
     # history = OysterHistory.new
     #

@@ -4,6 +4,7 @@ ruby '2.2.1'
 
 gem 'mechanize'
 gem 'awesome_print'
+gem 'thin'
 gem 'sinatra'
 gem 'sinatra-activerecord'
 gem 'rake'
