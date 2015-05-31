@@ -2,7 +2,7 @@ require 'sinatra/base'
 require 'sinatra/activerecord'
 require_relative 'helpers/oyster_history_parser'
 require_relative 'model/location'
-require_relative 'model/rail_journey'
+require_relative 'model/journey'
 
 
 class Public < Sinatra::Base
@@ -12,7 +12,7 @@ class Public < Sinatra::Base
   get '/data.json' do
     {
       locations: Location.all,
-      journeys: RailJourney.all
+      journeys: Journey.all
     }.to_json
   end
 
