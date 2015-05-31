@@ -1,6 +1,5 @@
 require 'sinatra/base'
 require 'sinatra/activerecord'
-require 'awesome_print'
 require_relative 'helpers/oyster_history_parser'
 require_relative 'model/location'
 require_relative 'model/rail_journey'
