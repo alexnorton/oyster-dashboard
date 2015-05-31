@@ -1,0 +1,6 @@
+development:
+  adapter: sqlite3
+  database: data.db
+
+production:
+  adapter: postgresql

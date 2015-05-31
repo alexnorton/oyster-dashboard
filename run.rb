@@ -1,5 +1,6 @@
 require 'awesome_print'
-require './oyster_history'
+require_relative 'app'
+require_relative 'oyster_history'
 
 #config = YAML.load_file('config.yml')
 

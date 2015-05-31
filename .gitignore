@@ -37,3 +37,4 @@ build/
 *.iml
 
 config.yml
+data.db

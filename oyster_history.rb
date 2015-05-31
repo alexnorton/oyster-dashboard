@@ -2,8 +2,8 @@ require 'mechanize'
 require 'csv'
 require 'date'
 require 'yaml'
-require_relative 'journey'
-require_relative 'location'
+require_relative 'model/rail_journey'
+require_relative 'model/location'
 
 class OysterHistory
 
@@ -82,14 +82,15 @@ class OysterHistory
 
       if(event[:start_time] && event[:end_time] && match)
 
-        from = get_location(match[1])
-        to   = get_location(match[2])
+        from = match[1]
+        to   = match[2]
 
-        @journeys.push Journey.new(
-          from,
-          to,
-          DateTime.parse(event[:start_time] + ' ' + event[:date]),
-          DateTime.parse(event[:end_time] + ' ' + event[:date])
+        @journeys.push RailJourney.create(
+          from: Location.find_or_create_by(name: from),
+          to: Location.find_or_create_by(name: to),
+          start_time: DateTime.parse(event[:start_time] + ' ' + event[:date]),
+          end_time: DateTime.parse(event[:end_time] + ' ' + event[:date]),
+          cost: event[:charge]
         )
       end
     end
