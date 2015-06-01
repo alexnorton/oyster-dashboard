@@ -8,6 +8,7 @@ module Sinatra
   module OysterHistoryParser
 
     def parse_oyster_csv(csv_file)
+      
       csv_data = csv_file.read
 
       headers = ['date', 'start time', 'end time', 'action', 'charge', 'credit', 'balance', 'note']
@@ -15,13 +16,10 @@ module Sinatra
       # Drop the first two lines of the CSV file
       csv_data = csv_data.lines.to_a[2..-1].join
 
-      journeys = []
-
-      CSV.parse(csv_data, headers: headers, :header_converters => :symbol, :converters => :all) do |row|
-        journeys.push process_event(row.to_hash)
+      CSV.parse(csv_data, headers: headers, :header_converters => :symbol, :converters => :all).map do |row|
+        process_event(row.to_hash)
       end
-
-      journeys
+      
     end
 
     private
