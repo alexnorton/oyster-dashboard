@@ -26,27 +26,26 @@ module Sinatra
 
     private
     def process_event(event)
-
-      journey = nil
-
+      
       case event[:action]
-        when /^(.*?)(?: (?:\[.*?\]|\(.*?\)))? to (.*?)(?: (?:\[.*?\]|\(.*?\)))?$/
-          journey = RailJourney.create(
+        when /^(.+?)(?: (?:\[.+\]|\(.+\)))? to (.+?)(?: (?:\[.+\]|\(.+\)))?$/
+          RailJourney.create(
               from: Location.find_or_create_by(name: $1),
               to: Location.find_or_create_by(name: $2),
               start_time: DateTime.parse(event[:start_time] + ' ' + event[:date]),
               end_time: DateTime.parse(event[:end_time] + ' ' + event[:date]),
               cost: event[:charge]
           )
-        when /^Bus journey, route (.*?)$/
-          journey = BusJourney.create(
+        when /^Bus journey, route (.+)$/
+          BusJourney.create(
               start_time: DateTime.parse(event[:start_time] + ' ' + event[:date]),
               route: $1,
               cost: event[:charge]
           )
+        else
+          nil
       end
-
-      journey
+      
     end
 
   end

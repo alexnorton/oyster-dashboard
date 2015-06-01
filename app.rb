@@ -41,13 +41,9 @@ class Import < Sinatra::Base
 
     error 400, 'No CSV files found' unless csv_files.length > 0
 
-    journeys = []
-
-    csv_files.each do |csv_file|
-      journeys.concat parse_oyster_csv csv_file[:tempfile]
-    end
-
-    journeys.to_json
+    csv_files.flat_map do |csv_file|
+      parse_oyster_csv csv_file[:tempfile]
+    end.to_json
   end
 
 end
