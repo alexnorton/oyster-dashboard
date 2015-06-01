@@ -33,13 +33,13 @@ class Import < Sinatra::Base
   # Mounted at /journey/import (see config.ru)
   post '/' do
 
-    error 400, 'No attachments found' unless params['attachments']
+    error 400, 'No attachments found' unless params.has_key('attachments')
 
     csv_files = params['attachments'].values.select do |attachment|
       /\.csv$/.match(attachment[:filename])
     end
 
-    error 400, 'No CSV files found' unless csv_files.length > 0
+    error 400, 'No CSV files found' if csv_files.empty?
 
     csv_files.flat_map do |csv_file|
       parse_oyster_csv csv_file[:tempfile]
