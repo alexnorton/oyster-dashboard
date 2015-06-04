@@ -1,0 +1,10 @@
+{
+  "name": "oyster-history-map",
+  "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install"
+  },
+  "repository": "https://github.com/alexnorton/oyster-dashboard.git",
+  "dependencies": {
+    "bower": "^1.4.1"
+  }
+}

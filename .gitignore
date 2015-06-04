@@ -38,3 +38,6 @@ build/
 
 config.yml
 data.db
+
+node_modules/
+public/lib/
