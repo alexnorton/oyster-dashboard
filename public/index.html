@@ -2,101 +2,34 @@
 <html>
   <head>
     <title></title>
-    <style>
-    
-    .node circle {
-      stroke: #fff;
-      stroke-width: 1.5px;
-      z-index: -1;
-    }
-    
-    .link {
-      stroke: #999;
-      stroke-opacity: .6;
-    }
-    
-    .node text {
-      font-size: 12px;
-    }
-    
-    html, body {
-      font-family: sans-serif;
-    }
-    
-    svg {
-      border: 1px solid black;
-    }
-    
-    </style>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css"/>
   </head>
   <body>
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script>
-    
-    var width = 1200,
-    height = 800;
-    
-    var color = d3.scale.category20();
-    
-    var force = d3.layout.force()
-    .charge(-1000)
-    .linkDistance(50)
-    .size([width, height]);
-    
-    var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
-    
-    d3.json("data.json", function(error, graph) {
-      force
-      .nodes(graph.locations)
-      .links(graph.journeys)
-      .start();
-      
-      var link = svg.selectAll(".link")
-      .data(graph.journeys)
-      .enter().append("line")
-      .attr("class", "link")
-      .style("stroke-width", function(d) { return Math.sqrt(d.value); });
-      
-      var node = svg.selectAll(".node")
-      .data(graph.locations)
-      .enter()
-      .append("g")
-      .attr("class", "node")
-      .call(force.drag);
-      
-      // node.append("circle")
-      //   .attr("r", 7)
-      //   .style("fill", function(d) { return color(0); });
-        
-        node.append("image")
-        .attr("xlink:href", "https://upload.wikimedia.org/wikipedia/commons/4/41/Underground.svg")
-        .attr("x", -10)
-        .attr("y", -10)
-        .attr("width", 20)
-        .attr("height", 20);
-      
-      node.append("text")
-      // .attr("dx", 12)
-      .attr("dy", "16px")
-      .style("text-anchor", "middle")
-      .text(function(d) { return d.name; });
-      
-      force.on("tick", function() {
-        link.attr("x1", function(d) { return d.source.x; })
-        .attr("y1", function(d) { return d.source.y; })
-        .attr("x2", function(d) { return d.target.x; })
-        .attr("y2", function(d) { return d.target.y; });
-        
-        // node.attr("cx", function(d) { return d.x; })
-        // .attr("cy", function(d) { return d.y; });
-        
-        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-        
-      });
-    });
-    
-    </script>
+  <div class="container">
+    <table id="journeys-table" class="table">
+      <thead>
+        <tr>
+          <th>
+            Date
+          </th>
+          <th>
+            From
+          </th>
+          <th>
+            To
+          </th>
+          <th>
+            Price
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </div>
+
+    <script src="lib/d3/d3.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>
