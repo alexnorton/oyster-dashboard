@@ -12,7 +12,7 @@ d3.json("data.json", function(error, data) {
   rows.selectAll('td')
     .data(function(journey) {
       return [
-        d3.time.format('%c')(new Date(journey.start_time)),
+        d3.time.format('%H:%M, %A %e %b')(new Date(journey.start_time)),
         getLocationById(data.locations, journey.from_id).name,
         getLocationById(data.locations, journey.to_id).name,
         '£' + d3.format('.2f')(journey.cost)
