@@ -9,6 +9,10 @@ class Public < Sinatra::Base
 
   register Sinatra::ActiveRecordExtension
 
+  get '/' do
+    send_file File.join(settings.public_folder, 'index.html')
+  end
+
   get '/data.json' do
     {
       locations: Location.all,
