@@ -1,39 +1,20 @@
 <!doctype html>
 <html>
   <head>
-    <title></title>
+    <title>Oyster Dashboard</title>
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css"/>
     <link rel="stylesheet" href="css/style.css"/>
   </head>
   <body>
   <div class="container">
-    <div id="barchart">
+    <div id="header" class="row">
+      <h1>Oyster Dashboard</h1>
+      <hr>
     </div>
-    <table id="journeys-table" class="table">
-      <thead>
-        <tr>
-          <th>
-            Type
-          </th>
-          <th>
-            Date
-          </th>
-          <th>
-            From
-          </th>
-          <th>
-            To
-          </th>
-          <th>
-            Route
-          </th>
-          <th>
-            Price
-          </th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <div id="barchart" class="row"></div>
+
+    <div id="table" class="row"></div>
+
   </div>
 
     <script src="lib/d3/d3.js"></script>

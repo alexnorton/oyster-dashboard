@@ -34,11 +34,11 @@ var getLocationById = function(id) {
 };
 
 var renderBarChart = function() {
-  var div = d3.select('#barchart');
+  var container = d3.select('#barchart');
 
   var margin = {top: 20, right: 20, bottom: 30, left: 40};
 
-  var width = 700 - margin.left - margin.right,
+  var width = 900 - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom;
 
   var x = d3.scale.ordinal()
@@ -49,25 +49,28 @@ var renderBarChart = function() {
 
   var xAxis = d3.svg.axis()
     .scale(x)
-    .orient('bottom');
+    .orient('bottom')
+    .tickFormat(d3.time.format("%b %Y"));
 
   var yAxis = d3.svg.axis()
     .scale(y)
-    .orient('left')
-    .tickSize(10);
+    .orient('left');
 
-  var svg = div.append('svg')
+  var svg = container.append('svg')
     .attr('width', width + margin.left + margin.right)
     .attr('height', height + margin.top + margin.bottom)
     .append('g')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
   var groups = d3.nest()
-    .key(function(journey) { return d3.time.format('%b %Y')(journey.startTime);})
+    .key(function(journey) { return d3.time.month(journey.startTime);})
     .rollup(function(journeys) { return journeys.length })
     .entries(journeys);
 
-  x.domain(groups.map(function(group) { return group.key; }));
+  var extent = d3.extent(groups, function(group) { return new Date(group.key); });
+
+  x.domain(d3.time.months(extent[0], extent[1]).concat(extent[1]));
+
   y.domain([0, d3.max(groups, function(group) { return group.values; })]);
 
   svg.append('g')
@@ -90,18 +93,33 @@ var renderBarChart = function() {
     .enter()
     .append('rect')
     .attr('class', 'bar')
-    .attr('x', function(group) { return x(group.key); })
+    .attr('x', function(group) {
+      return x(new Date(group.key))
+    })
     .attr('width', x.rangeBand())
     .attr('y', function(group) { return y(group.values); } )
     .attr('height', function(group) { return height - y(group.values) });
 };
 
 var renderTable = function() {
-  var tableBody = d3.select('table').select('tbody');
+
+  var container = d3.select('#table');
+
+  var table = container.append('table')
+    .attr('class', 'table');
+
+  table.append('thead')
+    .append('tr')
+    .selectAll('th')
+    .data(['Type', 'Date', 'From', 'To', 'Route', 'Price'])
+    .enter()
+    .append('th')
+    .text(function(heading) { return heading; });
 
   // Add rows to table body
-  var rows = tableBody.selectAll('tr')
-    .data(journeys)
+  var rows = table.append('tbody')
+    .selectAll('tr')
+    .data(journeys.reverse())
     .enter()
     .append('tr');
 
