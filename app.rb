@@ -16,7 +16,7 @@ class Public < Sinatra::Base
   get '/data.json' do
     {
       locations: Location.all,
-      journeys: Journey.all
+      journeys: Journey.all.map { |j| j.attributes }
     }.to_json
   end
 
