@@ -41,6 +41,13 @@ var renderBarChart = function() {
   var width = 900 - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom;
 
+  var groups = d3.nest()
+    .key(function(journey) { return d3.time.month(journey.startTime);})
+    .rollup(function(journeys) { return journeys.length })
+    .entries(journeys);
+
+  var extent = d3.extent(groups, function(group) { return new Date(group.key); });
+
   var x = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1);
 
@@ -61,13 +68,6 @@ var renderBarChart = function() {
     .attr('height', height + margin.top + margin.bottom)
     .append('g')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
-  var groups = d3.nest()
-    .key(function(journey) { return d3.time.month(journey.startTime);})
-    .rollup(function(journeys) { return journeys.length })
-    .entries(journeys);
-
-  var extent = d3.extent(groups, function(group) { return new Date(group.key); });
 
   x.domain(d3.time.months(extent[0], extent[1]).concat(extent[1]));
 

@@ -1,6 +1,6 @@
 require_relative 'app'
 
 run Rack::URLMap.new({
- '/' => Public,
- '/journey/import' => Import
+ '/' => PublicApp,
+ '/journey/import' => ImportApp
 })

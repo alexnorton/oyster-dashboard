@@ -8,7 +8,7 @@ module Sinatra
   module OysterHistoryParser
 
     def parse_oyster_csv(csv_file)
-      
+
       csv_data = csv_file.read
 
       headers = ['date', 'start time', 'end time', 'action', 'charge', 'credit', 'balance', 'note']
@@ -19,31 +19,31 @@ module Sinatra
       CSV.parse(csv_data, headers: headers, :header_converters => :symbol, :converters => :all).map do |row|
         process_event(row.to_hash)
       end
-      
+
     end
 
     private
     def process_event(event)
-      
+
       case event[:action]
         when /^(.+?)(?: (?:\[.+\]|\(.+\)))? to (.+?)(?: (?:\[.+\]|\(.+\)))?$/
           RailJourney.create(
               from: Location.find_or_create_by(name: $1),
               to: Location.find_or_create_by(name: $2),
-              start_time: DateTime.parse(event[:start_time] + ' ' + event[:date]),
-              end_time: DateTime.parse(event[:end_time] + ' ' + event[:date]),
+              start_time: Time.zone.parse(event[:start_time] + ' ' + event[:date]),
+              end_time: Time.zone.parse(event[:end_time] + ' ' + event[:date]),
               cost: event[:charge]
           )
         when /^Bus journey, route (.+)$/
           BusJourney.create(
-              start_time: DateTime.parse(event[:start_time] + ' ' + event[:date]),
+              start_time: Time.zone.parse(event[:start_time] + ' ' + event[:date]),
               route: $1,
               cost: event[:charge]
           )
         else
           nil
       end
-      
+
     end
 
   end
